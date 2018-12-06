@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="445.0" y="1024.0">ch.schmarcel.NeuralNet.JSONConversionError</node>
+    <node x="410.0" y="535.0">ch.schmarcel.NeuralNet.NeuralNet</node>
+    <node x="0.0" y="206.0">ch.schmarcel.NeuralNet.Matrix</node>
+    <node x="423.0" y="0.0">ch.schmarcel.NeuralNet.TrainableNeuralNet</node>
+    <node x="808.0" y="402.0">ch.schmarcel.NeuralNet.ActivationFunction</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="ch.schmarcel.NeuralNet.NeuralNet" target="ch.schmarcel.NeuralNet.JSONConversionError">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="ch.schmarcel.NeuralNet.TrainableNeuralNet" target="ch.schmarcel.NeuralNet.ActivationFunction">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="ch.schmarcel.NeuralNet.NeuralNet" target="ch.schmarcel.NeuralNet.Matrix">
+      <point x="0.0" y="-11.438345939002602" />
+      <point x="0.0" y="-11.438345939002616" />
+    </edge>
+    <edge source="ch.schmarcel.NeuralNet.TrainableNeuralNet" target="ch.schmarcel.NeuralNet.NeuralNet">
+      <point x="-5.013341012995397" y="0.0" />
+      <point x="-5.013341012995387" y="0.0" />
+    </edge>
+    <edge source="ch.schmarcel.NeuralNet.TrainableNeuralNet" target="ch.schmarcel.NeuralNet.Matrix">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="ch.schmarcel.NeuralNet.NeuralNet" target="ch.schmarcel.NeuralNet.ActivationFunction">
+      <point x="0.0" y="5.3603954127424345" />
+      <point x="0.0" y="5.360395412742438" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.5999999999999998" x="605.27380952381" y="641.4642857142861" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+    <Category>Inner Classes</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
