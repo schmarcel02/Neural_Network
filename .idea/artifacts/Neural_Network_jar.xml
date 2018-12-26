@@ -4,6 +4,8 @@
     <root id="archive" name="Neural Network.jar">
       <element id="module-output" name="Neural Network" />
       <element id="extracted-dir" path="$PROJECT_DIR$/org.json.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/Matrix.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/BinaryUtil.jar" path-in-jar="/" />
     </root>
   </artifact>
 </component>

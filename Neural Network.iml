@@ -10,5 +10,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="org.json" level="project" />
+    <orderEntry type="library" name="Matrix" level="project" />
+    <orderEntry type="library" name="BinaryUtil" level="project" />
   </component>
 </module>

@@ -1,13 +1,15 @@
 package ch.schmarcel.NeuralNet;
 
+import ch.schmarcel.matrix.DoubleMatrix;
+
 public class TrainableNeuralNet extends NeuralNet {
     public double learningRate = 0.1;
 
-    private Matrix[] errors;
-    private Matrix[] gradients;
-    private Matrix[] weight_deltas;
-    private Matrix[] layers_transposed;
-    private Matrix[] weights_transposed;
+    private DoubleMatrix[] errors;
+    private DoubleMatrix[] gradients;
+    private DoubleMatrix[] weight_deltas;
+    private DoubleMatrix[] layers_transposed;
+    private DoubleMatrix[] weights_transposed;
 
     public TrainableNeuralNet(int initialMin, int initialMax, ActivationFunction activationFunction, int... layer_sizes) {
         super(initialMin, initialMax, activationFunction, layer_sizes);
@@ -17,32 +19,32 @@ public class TrainableNeuralNet extends NeuralNet {
         super(-1, 1, ActivationFunction.TANH, layer_sizes);
     }
 
-    public TrainableNeuralNet(Matrix[] weights, Matrix[] biases, ActivationFunction activationFunction, int[] layer_sizes) {
+    public TrainableNeuralNet(DoubleMatrix[] weights, DoubleMatrix[] biases, ActivationFunction activationFunction, int[] layer_sizes) {
         super(weights, biases, activationFunction, layer_sizes);
     }
 
-    public TrainableNeuralNet(String string) throws JSONConversionError{
-        super(string);
+    public TrainableNeuralNet(NeuralNet neuralNet) {
+        super(neuralNet.weights, neuralNet.biases, neuralNet.activationFunction, neuralNet.layer_sizes);
     }
 
     public synchronized void train(double[] input, double[] target) {
-        layers = new Matrix[layer_sizes.length];
-        errors = new Matrix[layers.length - 1];
-        gradients = new Matrix[layers.length - 1];
-        weight_deltas = new Matrix[layers.length - 1];
-        layers_transposed = new Matrix[layers.length - 1];
-        weights_transposed = new Matrix[layers.length - 2];
+        layers = new DoubleMatrix[layer_sizes.length];
+        errors = new DoubleMatrix[layers.length - 1];
+        gradients = new DoubleMatrix[layers.length - 1];
+        weight_deltas = new DoubleMatrix[layers.length - 1];
+        layers_transposed = new DoubleMatrix[layers.length - 1];
+        weights_transposed = new DoubleMatrix[layers.length - 2];
 
         feedForward(input);
 
-        Matrix targets = new Matrix(target);
-        errors[layers.length - 2] = Matrix.subtract(targets, layers[layers.length - 1]);
+        DoubleMatrix targets = new DoubleMatrix(target);
+        errors[layers.length - 2] = DoubleMatrix.subtract(targets, layers[layers.length - 1]);
 
         calculate(layers.length - 2);
 
         for (int i = layers.length - 3; i >= 0; i--) {
-            weights_transposed[i] = Matrix.transpose(this.weights[i + 1]);
-            errors[i] = Matrix.multiply(weights_transposed[i], errors[i + 1]);
+            weights_transposed[i] = DoubleMatrix.transpose(this.weights[i + 1]);
+            errors[i] = DoubleMatrix.multiply(weights_transposed[i], errors[i + 1]);
 
             calculate(i);
         }
@@ -62,15 +64,15 @@ public class TrainableNeuralNet extends NeuralNet {
     }
 
     private void calculateGradient(int index) {
-        gradients[index] = new Matrix(layers[index + 1]);
-        gradients[index].doFunction(activationFunction.df);
+        gradients[index] = new DoubleMatrix(layers[index + 1]);
+        gradients[index].applyFunction(activationFunction.df);
         gradients[index].multiply(errors[index]);
         gradients[index].multiply(learningRate);
     }
 
     private void calculateWeightDeltas(int index) {
-        layers_transposed[index] = Matrix.transpose(layers[index]);
-        weight_deltas[index] = Matrix.multiply(gradients[index], layers_transposed[index]);
+        layers_transposed[index] = DoubleMatrix.transpose(layers[index]);
+        weight_deltas[index] = DoubleMatrix.multiply(gradients[index], layers_transposed[index]);
     }
 
     private void updateWeights(int index) {
